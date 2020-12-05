@@ -30,13 +30,13 @@ app.post("/api/student",(req,res)=>{
     const currentClass=req.body.currentClass;
     const division=req.body.division;
     //console.log(req.body.division);
-    const new_id={id:`${id}`};
+    const new_id={id:id};
     if(name != undefined && currentClass!=undefined && division!=undefined){
         const newStudent={id:id,name:`${name}`,currentClass:currentClass,division:`${division}`};
         //studentArray.push(newStudent);
         studentArray=[...studentArray,newStudent];
         //console.log(studentArray);
-        res.send(new_id);
+        res.send(JSON.stringify(new_id));
     }
     else{
         res.sendStatus(400);
@@ -55,7 +55,7 @@ app.put("/api/student/:id",(req,res)=>{
         const newArray=[...filterArray,updateArray];
         studentArray=newArray;
         //console.log(studentArray);
-        res.sendStatus(200);
+        //res.sendStatus(200);
     } else {
         res.sendStatus(400);
     }
