@@ -5,7 +5,6 @@ const app = express()
 const bodyParser = require("body-parser");
 const port = 8080
 app.use(express.urlencoded());
-
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -30,6 +29,14 @@ app.post("/api/student",(req,res)=>{
     const name=req.body.name;
     const currentClass=req.body.currentClass;
     const division=req.body.division;
+    console.log(req.body.division);
+    const body={id:`${id}`};
+    if(name != undefined && currentClass!=undefined && division!=undefined){
+        res.send(JSON.stringify(body));
+    }
+    else{
+        res.sendStatus(400);
+    }
 });
 
 app.put("/api/student/:id",(req,res)=>{
@@ -41,10 +48,10 @@ app.delete("/api/student/:id",(req,res)=>{
     const studentData = studentArray.filter((data) => data.id == id);
     if (studentData.length > 0) {
         const newArray=studentArray.filter((data) => data.id != id);
-        //How to update in InitialData.js file
+        //update the student array
         studentArray=newArray;
         console.log(studentArray);
-        res.status(201).send(JSON.stringify(newArray));
+        res.sendStatus(200);
     } else {
         res.sendStatus(404);
     }
