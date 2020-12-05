@@ -44,7 +44,17 @@ app.post("/api/student",(req,res)=>{
 });
 
 app.put("/api/student/:id",(req,res)=>{
-
+    const id = req.params.id;
+    const studentData = studentArray.filter((data) => data.id == id);
+    if (studentData.length > 0) {
+        const newArray=studentArray.filter((data) => data.id != id);
+        //update the student array
+        studentArray=newArray;
+        console.log(studentArray);
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 app.delete("/api/student/:id",(req,res)=>{
