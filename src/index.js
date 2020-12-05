@@ -18,7 +18,7 @@ app.get("/api/student/:id", (req, res) => {
     const id = req.params.id;
     const studentData = studentArray.filter((data) => data.id == id);
     if (studentData.length > 0) {
-        res.status(201).send(JSON.stringify(studentData));
+        res.send(JSON.stringify(studentData));
     } else {
         res.sendStatus(404);
     }
