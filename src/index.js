@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
 app.get("/api/student", (req, res) => {
-    res.status(201).send(JSON.stringify(studentArray));
+    res.status(201).send(studentArray);
 });
 
 app.get("/api/student/:id", (req, res) => {
