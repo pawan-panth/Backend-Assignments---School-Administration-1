@@ -35,7 +35,7 @@ app.post("/api/student",(req,res)=>{
         const newStudent={id:id,name:`${name}`,currentClass:currentClass,division:`${division}`};
         //studentArray.push(newStudent);
         studentArray=[...studentArray,newStudent];
-        //console.log(studentArray);
+        //console.log(new_id);
         res.send(new_id);
     }
     else{
