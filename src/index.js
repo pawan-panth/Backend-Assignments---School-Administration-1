@@ -35,7 +35,7 @@ app.post("/api/student",(req,res)=>{
         const newStudent={id:id,name:`${name}`,currentClass:currentClass,division:`${division}`};
         //studentArray.push(newStudent);
         studentArray=[...studentArray,newStudent];
-        console.log(studentArray);
+        //console.log(studentArray);
         res.send(new_id);
     }
     else{
@@ -44,16 +44,20 @@ app.post("/api/student",(req,res)=>{
 });
 
 app.put("/api/student/:id",(req,res)=>{
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const studentData = studentArray.filter((data) => data.id == id);
     if (studentData.length > 0) {
-        const newArray=studentArray.filter((data) => data.id != id);
-        //update the student array
+        const name=req.body.name?req.body.name:studentData[0].name;
+        const currentClass=req.body.currentClass?req.body.name:studentData[0].currentClass;
+        const division=req.body.division?req.body.division:studentData[0].division;
+        const updateArray={id:id,name:`${name}`,currentClass:currentClass,division:`${division}`};
+        const filterArray=studentArray.filter((data) => data.id != id);
+        const newArray=[...filterArray,updateArray];
         studentArray=newArray;
-        console.log(studentArray);
+        //console.log(studentArray);
         res.sendStatus(200);
     } else {
-        res.sendStatus(404);
+        res.sendStatus(400);
     }
 });
 
@@ -64,7 +68,7 @@ app.delete("/api/student/:id",(req,res)=>{
         const newArray=studentArray.filter((data) => data.id != id);
         //update the student array
         studentArray=newArray;
-        console.log(studentArray);
+        //console.log(studentArray);
         res.sendStatus(200);
     } else {
         res.sendStatus(404);
