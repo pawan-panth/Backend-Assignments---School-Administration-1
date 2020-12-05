@@ -18,7 +18,7 @@ app.get("/api/student/:id", (req, res) => {
     const id = req.params.id;
     const studentData = studentArray.filter((data) => data.id == id);
     if (studentData.length > 0) {
-        res.send(JSON.stringify(studentData));
+        res.send(studentData);
     } else {
         res.sendStatus(404);
     }
@@ -29,10 +29,13 @@ app.post("/api/student",(req,res)=>{
     const name=req.body.name;
     const currentClass=req.body.currentClass;
     const division=req.body.division;
-    console.log(req.body.division);
+    //console.log(req.body.division);
     const body={id:`${id}`};
     if(name != undefined && currentClass!=undefined && division!=undefined){
-        res.send(JSON.stringify(body));
+        const newStudent={id:id,name:`${name}`,currentClass:currentClass,division:`${division}`};
+        studentArray.push(newStudent);
+        //console.log(studentArray);
+        res.send(body);
     }
     else{
         res.sendStatus(400);
