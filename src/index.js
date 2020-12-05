@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // your code goes here
 app.get("/api/student", (req, res) => {
-    res.status(201).send(studentArray);
+    res.send(studentArray);
 });
 
 app.get("/api/student/:id", (req, res) => {
@@ -26,7 +26,10 @@ app.get("/api/student/:id", (req, res) => {
 });
 
 app.post("/api/student",(req,res)=>{
-
+    const id=new Date().valueOf();
+    const name=req.body.name;
+    const currentClass=req.body.currentClass;
+    const division=req.body.division;
 });
 
 app.put("/api/student/:id",(req,res)=>{
